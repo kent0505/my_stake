@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_stake/features/shop/pages/shop_page.dart';
 
 import '../../../core/widgets/custom_scaffold.dart';
 import '../bloc/home_bloc.dart';
@@ -17,9 +18,9 @@ class HomePage extends StatelessWidget {
           children: [
             BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
-                if (state is HomeSettings) return const SettingsPage();
+                if (state is HomeShop) return const ShopPage();
 
-                if (state is HomeActivities) return const Text('Actives');
+                if (state is HomeSettings) return const SettingsPage();
 
                 return const _Home();
               },

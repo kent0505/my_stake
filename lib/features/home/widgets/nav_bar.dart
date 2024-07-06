@@ -25,16 +25,16 @@ class NavBar extends StatelessWidget {
               children: [
                 _NavBarButton(
                   asset: 'shop',
-                  active: state is HomeInitial,
+                  active: state is HomeShop,
                   onPressed: () {
-                    context.read<HomeBloc>().add(ChangePageEvent(index: 0));
+                    context.read<HomeBloc>().add(ChangePageEvent(index: 1));
                   },
                 ),
                 _NavBarButton(
                   asset: 'home',
-                  active: state is HomeActivities,
+                  active: state is HomeInitial,
                   onPressed: () {
-                    context.read<HomeBloc>().add(ChangePageEvent(index: 1));
+                    context.read<HomeBloc>().add(ChangePageEvent(index: 0));
                   },
                 ),
                 _NavBarButton(
