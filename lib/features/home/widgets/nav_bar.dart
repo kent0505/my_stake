@@ -13,10 +13,10 @@ class NavBar extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 63,
+        height: 63 + MediaQuery.of(context).viewPadding.bottom,
         color: AppColors.navBar,
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        alignment: Alignment.topCenter,
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             return Row(

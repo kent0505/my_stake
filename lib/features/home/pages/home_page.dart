@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_stake/features/shop/pages/shop_page.dart';
 
 import '../../../core/widgets/custom_scaffold.dart';
+import '../../shop/pages/shop_page.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/nav_bar.dart';
 import 'settings_page.dart';
@@ -13,21 +13,26 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            BlocBuilder<HomeBloc, HomeState>(
-              builder: (context, state) {
-                if (state is HomeShop) return const ShopPage();
+      body: Column(
+        children: [
+          SizedBox(height: MediaQuery.of(context).viewPadding.top),
+          Expanded(
+            child: Stack(
+              children: [
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    if (state is HomeShop) return const ShopPage();
 
-                if (state is HomeSettings) return const SettingsPage();
+                    if (state is HomeSettings) return const SettingsPage();
 
-                return const _Home();
-              },
+                    return const _Home();
+                  },
+                ),
+                const NavBar(),
+              ],
             ),
-            const NavBar(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
