@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/money_icon.dart';
@@ -24,7 +25,9 @@ class StockCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: CupertinoButton(
-        onPressed: () {},
+        onPressed: () {
+          context.push('/stock', extra: stock);
+        },
         padding: EdgeInsets.zero,
         child: Row(
           children: [
