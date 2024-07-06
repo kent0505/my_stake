@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_stake/core/config/app_colors.dart';
-import 'package:my_stake/core/utils.dart';
 
+import '../../core/config/app_colors.dart';
+import '../../core/utils.dart';
 import '../../core/widgets/custom_scaffold.dart';
 
 class OnboardPage extends StatefulWidget {

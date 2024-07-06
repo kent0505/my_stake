@@ -28,13 +28,18 @@ class SettingsPage extends StatelessWidget {
           height: 150,
         ),
         const SizedBox(height: 18),
-        const Text(
-          'Edit profile',
-          style: TextStyle(
-            color: AppColors.pink,
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            fontFamily: 'Poppins',
+        CupertinoButton(
+          minSize: 24,
+          onPressed: () {},
+          padding: EdgeInsets.zero,
+          child: const Text(
+            'Edit profile',
+            style: TextStyle(
+              color: AppColors.pink,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Poppins',
+            ),
           ),
         ),
         const SizedBox(height: 2),
