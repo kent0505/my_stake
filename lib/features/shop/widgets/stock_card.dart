@@ -83,7 +83,7 @@ class StockCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${stock.price}',
+                      '${stock.price + stock.grow}',
                       style: const TextStyle(
                         color: AppColors.pink,
                         fontSize: 9,

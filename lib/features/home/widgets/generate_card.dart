@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -72,7 +74,14 @@ class _Button extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: CupertinoButton(
-        onPressed: () {},
+        onPressed: () {
+          Random random = Random();
+          double randomIndex = random.nextDouble() * random.nextDouble() * 6;
+          double randomIndex2 = random.nextDouble() * -4;
+          double data = randomIndex2 + randomIndex;
+          double formattedValue = double.parse(data.toStringAsFixed(1));
+          print(formattedValue);
+        },
         padding: EdgeInsets.zero,
         child: const Center(
           child: Text(

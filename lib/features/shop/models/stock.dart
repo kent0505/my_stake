@@ -1,8 +1,8 @@
 class Stock {
   final String title;
   final String asset;
-  final double price;
-  final double grow;
+  double price;
+  double grow;
   final String positive;
   final String negative;
 

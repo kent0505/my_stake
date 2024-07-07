@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../../core/widgets/current_coins_card.dart';
+import '../../stock/bloc/stock_bloc.dart';
 import '../models/stock.dart';
 import '../widgets/buy_button.dart';
 import '../widgets/quantity_field.dart';
@@ -30,7 +32,8 @@ class _StockPageState extends State<StockPage> {
 
   String getTotalPrice() {
     try {
-      double total = int.parse(controller.text) * widget.stock.price;
+      double price = widget.stock.price + widget.stock.grow;
+      double total = int.parse(controller.text) * price;
       return total.toString();
     } catch (e) {
       return widget.stock.price.toString();
@@ -64,9 +67,13 @@ class _StockPageState extends State<StockPage> {
                   const CurrentCoinsCard(),
                   const _Text('Type', 16),
                   const SizedBox(height: 8),
-                  StockCard(
-                    stock: widget.stock,
-                    active: false,
+                  BlocBuilder<StockBloc, StockState>(
+                    builder: (context, state) {
+                      return StockCard(
+                        stock: widget.stock,
+                        active: false,
+                      );
+                    },
                   ),
                   const SizedBox(height: 8),
                   const _Text('Quantity of purchase', 16),
@@ -114,7 +121,11 @@ class _StockPageState extends State<StockPage> {
                   const SizedBox(height: 21),
                   const _Text('Total price:', 20),
                   const SizedBox(height: 8),
-                  TotalPriceCard(total: getTotalPrice()),
+                  BlocBuilder<StockBloc, StockState>(
+                    builder: (context, state) {
+                      return TotalPriceCard(total: getTotalPrice());
+                    },
+                  ),
                   const Spacer(),
                   SellButton(
                     sell: widget.sell,

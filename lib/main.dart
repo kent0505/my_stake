@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/config/router.dart';
 import 'core/config/themes.dart';
 import 'features/home/bloc/home_bloc.dart';
+import 'features/stock/bloc/stock_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => StockBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

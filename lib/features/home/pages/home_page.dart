@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/current_coins_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../shop/pages/shop_page.dart';
+import '../../stock/bloc/stock_bloc.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/empty_data.dart';
 import '../widgets/generate_card.dart';
@@ -19,6 +22,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 2), (Timer t) {
+      context.read<StockBloc>().add(ChangePriceEvent());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(

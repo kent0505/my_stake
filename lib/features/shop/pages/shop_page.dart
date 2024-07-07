@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/widgets/current_coins_card.dart';
-import '../models/stock.dart';
+import '../../stock/bloc/stock_bloc.dart';
 import '../widgets/buy_card.dart';
 import '../widgets/stock_card.dart';
 
@@ -19,10 +20,22 @@ class ShopPage extends StatelessWidget {
           const SizedBox(height: 13),
           const BuyCard(),
           const SizedBox(height: 34),
-          ...List.generate(
-            stocks.length,
-            (index) {
-              return StockCard(stock: stocks[index]);
+          BlocBuilder<StockBloc, StockState>(
+            builder: (context, state) {
+              if (state is StockPriceChanged) {
+                return Column(
+                  children: [
+                    ...List.generate(
+                      state.stocks.length,
+                      (index) {
+                        return StockCard(stock: state.stocks[index]);
+                      },
+                    ),
+                  ],
+                );
+              }
+
+              return Container();
             },
           ),
         ],
