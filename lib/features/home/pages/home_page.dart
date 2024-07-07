@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/widgets/current_coins_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../shop/pages/shop_page.dart';
 import '../bloc/home_bloc.dart';
+import '../widgets/empty_data.dart';
+import '../widgets/generate_card.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/your_stock_card.dart';
 import 'settings_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -38,20 +47,24 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _Home extends StatefulWidget {
+class _Home extends StatelessWidget {
   const _Home();
 
   @override
-  State<_Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<_Home> {
-  @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Text('Home'),
-      ],
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          CurrentCoinsCard(),
+          SizedBox(height: 7),
+          GenerateCard(),
+          SizedBox(height: 27),
+          YourStockCard(),
+          EmptyData(),
+        ],
+      ),
     );
   }
 }

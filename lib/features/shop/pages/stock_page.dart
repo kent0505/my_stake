@@ -29,8 +29,12 @@ class _StockPageState extends State<StockPage> {
   final controller = TextEditingController();
 
   String getTotalPrice() {
-    double total = int.parse(controller.text) * widget.stock.price;
-    return total.toString();
+    try {
+      double total = int.parse(controller.text) * widget.stock.price;
+      return total.toString();
+    } catch (e) {
+      return widget.stock.price.toString();
+    }
   }
 
   @override
@@ -67,7 +71,7 @@ class _StockPageState extends State<StockPage> {
                   const SizedBox(height: 8),
                   const _Text('Quantity of purchase', 16),
                   const SizedBox(height: 8),
-                  const QuantityField(),
+                  QuantityField(controller: controller),
                   const SizedBox(height: 8),
                   const _Text('Description', 20),
                   const SizedBox(height: 19),
