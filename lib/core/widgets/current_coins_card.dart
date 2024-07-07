@@ -25,7 +25,7 @@ class CurrentCoinsCard extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    '$myCoins',
+                    '$myCoins'.replaceAll('.0', ''),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,

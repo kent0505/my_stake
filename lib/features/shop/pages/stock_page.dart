@@ -62,77 +62,73 @@ class _StockPageState extends State<StockPage> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                children: [
-                  const CurrentCoinsCard(),
-                  const _Text('Type', 16),
-                  const SizedBox(height: 8),
-                  BlocBuilder<StockBloc, StockState>(
-                    builder: (context, state) {
-                      return StockCard(
+              child: BlocBuilder<StockBloc, StockState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      const CurrentCoinsCard(),
+                      const _Text('Type', 16),
+                      const SizedBox(height: 8),
+                      StockCard(
                         stock: widget.stock,
                         active: false,
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  const _Text('Quantity of purchase', 16),
-                  const SizedBox(height: 8),
-                  QuantityField(controller: controller),
-                  const SizedBox(height: 8),
-                  const _Text('Description', 20),
-                  const SizedBox(height: 19),
-                  const Text(
-                    'Event',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Container(
-                    height: 1,
-                    width: 42,
-                    margin: const EdgeInsets.symmetric(vertical: 2),
-                    color: Colors.white,
-                  ),
-                  Text(
-                    widget.stock.grow < 0 ? 'Negative' : 'Positive',
-                    style: TextStyle(
-                      color: widget.stock.grow < 0
-                          ? const Color(0xffC92F2F)
-                          : const Color(0xff37E83E),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.stock.grow < 0
-                        ? widget.stock.negative
-                        : widget.stock.positive,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 21),
-                  const _Text('Total price:', 20),
-                  const SizedBox(height: 8),
-                  BlocBuilder<StockBloc, StockState>(
-                    builder: (context, state) {
-                      return TotalPriceCard(total: getTotalPrice());
-                    },
-                  ),
-                  const Spacer(),
-                  SellButton(
-                    sell: widget.sell,
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 41),
-                ],
+                      ),
+                      const SizedBox(height: 8),
+                      const _Text('Quantity of purchase', 16),
+                      const SizedBox(height: 8),
+                      QuantityField(controller: controller),
+                      const SizedBox(height: 8),
+                      const _Text('Description', 20),
+                      const SizedBox(height: 19),
+                      const Text(
+                        'Event',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Container(
+                        height: 1,
+                        width: 42,
+                        margin: const EdgeInsets.symmetric(vertical: 2),
+                        color: Colors.white,
+                      ),
+                      Text(
+                        widget.stock.grow < 0 ? 'Negative' : 'Positive',
+                        style: TextStyle(
+                          color: widget.stock.grow < 0
+                              ? const Color(0xffC92F2F)
+                              : const Color(0xff37E83E),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        widget.stock.grow < 0
+                            ? widget.stock.negative
+                            : widget.stock.positive,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 21),
+                      const _Text('Total price:', 20),
+                      const SizedBox(height: 8),
+                      TotalPriceCard(total: getTotalPrice()),
+                      const Spacer(),
+                      SellButton(
+                        sell: widget.sell,
+                        onPressed: () {},
+                      ),
+                      const SizedBox(height: 41),
+                    ],
+                  );
+                },
               ),
             ),
           ),

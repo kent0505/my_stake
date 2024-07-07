@@ -54,22 +54,28 @@ class StockCard extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      stock.grow < 0 ? 'assets/grow2.svg' : 'assets/grow1.svg',
-                    ),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${stock.grow}%',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 9,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'SF',
+                SizedBox(
+                  width: 45,
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        stock.grow < 0
+                            ? 'assets/grow2.svg'
+                            : 'assets/grow1.svg',
                       ),
-                    ),
-                  ],
+                      // const SizedBox(width: 4),
+                      const Spacer(),
+                      Text(
+                        '${stock.grow}%',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'SF',
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const Text(
                   'Price',
