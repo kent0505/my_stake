@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     await getData().then(
       (value) async {
         await Future.delayed(
-          const Duration(seconds: 1),
+          const Duration(seconds: 2),
           () {
             if (onboarding) {
               context.go('/onboard');

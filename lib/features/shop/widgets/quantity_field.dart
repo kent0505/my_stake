@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class QuantityField extends StatelessWidget {
-  const QuantityField({super.key, required this.controller});
+  const QuantityField({
+    super.key,
+    required this.controller,
+    required this.onChanged,
+  });
 
   final TextEditingController controller;
+  final void Function() onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +53,7 @@ class QuantityField extends StatelessWidget {
           },
           onChanged: (value) {
             controller.text = value;
-            // onChanged();
+            onChanged();
           },
         ),
       ),

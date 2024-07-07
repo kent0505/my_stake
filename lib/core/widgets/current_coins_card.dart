@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/shop/bloc/shop_bloc.dart';
 import '../utils.dart';
 import 'money_icon.dart';
 
@@ -24,13 +26,17 @@ class CurrentCoinsCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(32),
                 ),
                 child: Center(
-                  child: Text(
-                    '$myCoins'.replaceAll('.0', ''),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: BlocBuilder<ShopBloc, ShopState>(
+                    builder: (context, state) {
+                      return Text(
+                        '$myCoins'.replaceAll('.0', ''),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),

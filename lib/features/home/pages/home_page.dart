@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_stake/core/utils.dart';
+import 'package:my_stake/features/home/widgets/my_stock_card.dart';
 
 import '../../../core/widgets/current_coins_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    getMyStocks();
     Timer.periodic(const Duration(seconds: 2), (Timer t) {
       context.read<StockBloc>().add(ChangePriceEvent());
     });
@@ -71,19 +74,46 @@ class _Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        children: [
-          SizedBox(height: 20),
-          CurrentCoinsCard(),
-          SizedBox(height: 7),
-          GenerateCard(),
-          SizedBox(height: 27),
-          YourStockCard(),
-          EmptyData(),
-        ],
-      ),
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              CurrentCoinsCard(),
+              SizedBox(height: 7),
+              GenerateCard(),
+              SizedBox(height: 27),
+              YourStockCard(),
+            ],
+          ),
+        ),
+        if (myStocks.isEmpty)
+          const EmptyData()
+        else
+          Expanded(
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    children: [
+                      ...List.generate(
+                        myStocks.length,
+                        (index) {
+                          return MyStockCard(stock: myStocks[index]);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 63),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }

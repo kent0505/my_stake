@@ -3,13 +3,16 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_stake/features/shop/widgets/success_dialog.dart';
 
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../../core/widgets/current_coins_card.dart';
 import '../../stock/bloc/stock_bloc.dart';
+import '../bloc/shop_bloc.dart';
 import '../models/stock.dart';
 import '../widgets/buy_button.dart';
+import '../widgets/error_dialog.dart';
 import '../widgets/quantity_field.dart';
 import '../widgets/stock_card.dart';
 import '../widgets/total_price_card.dart';
@@ -31,6 +34,8 @@ class StockPage extends StatefulWidget {
 class _StockPageState extends State<StockPage> {
   final controller = TextEditingController();
 
+  bool active = true;
+
   String getTotalPrice() {
     try {
       double price = widget.stock.price + widget.stock.grow;
@@ -39,6 +44,16 @@ class _StockPageState extends State<StockPage> {
     } catch (e) {
       return widget.stock.price.toString();
     }
+  }
+
+  void checkActive() {
+    setState(() {
+      if (controller.text.isEmpty) {
+        active = false;
+      } else {
+        active = true;
+      }
+    });
   }
 
   @override
@@ -77,7 +92,10 @@ class _StockPageState extends State<StockPage> {
                       const SizedBox(height: 8),
                       const _Text('Quantity of purchase', 16),
                       const SizedBox(height: 8),
-                      QuantityField(controller: controller),
+                      QuantityField(
+                        controller: controller,
+                        onChanged: checkActive,
+                      ),
                       const SizedBox(height: 8),
                       const _Text('Description', 20),
                       const SizedBox(height: 19),
@@ -122,91 +140,39 @@ class _StockPageState extends State<StockPage> {
                       const SizedBox(height: 8),
                       TotalPriceCard(total: getTotalPrice()),
                       const Spacer(),
-                      SellButton(
-                        sell: widget.sell,
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                backgroundColor: const Color(0xff1C1027),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(8),
-                                  ),
-                                ),
-                                child: Container(
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 12),
-                                      const Text(
-                                        'Congratulations !',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        'You have purchased one share',
-                                        style: TextStyle(
-                                          color: const Color(0xffFFFFFF)
-                                              .withOpacity(0.6),
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Row(
-                                        children: [
-                                          const SizedBox(width: 36),
-                                          Image.asset(
-                                            'assets/${widget.stock.asset}.png',
-                                            height: 40,
-                                          ),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      Container(
-                                        height: 35,
-                                        width: 235,
-                                        margin: const EdgeInsets.symmetric(
-                                          horizontal: 38,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xff7F04A8),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: CupertinoButton(
-                                          onPressed: () {},
-                                          padding: EdgeInsets.zero,
-                                          child: const Center(
-                                            child: Text(
-                                              'Continue',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 9,
-                                                fontWeight: FontWeight.w600,
-                                                fontFamily: 'SF',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 12),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
+                      BlocListener<ShopBloc, ShopState>(
+                        listener: (context, state) {
+                          if (state is ShopSuccessState) {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return SuccessDialog(
+                                  stock: widget.stock,
+                                  count: int.parse(controller.text),
+                                );
+                              },
+                            );
+                          }
+
+                          if (state is ShopErrorState) {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const ErrorDialog();
+                              },
+                            );
+                          }
                         },
+                        child: SellButton(
+                          sell: widget.sell,
+                          active: active,
+                          onPressed: () {
+                            context.read<ShopBloc>().add(BuyStockEvent(
+                                  stock: widget.stock,
+                                  count: int.parse(controller.text),
+                                ));
+                          },
+                        ),
                       ),
                       const SizedBox(height: 41),
                     ],

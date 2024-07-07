@@ -1,4 +1,5 @@
 class Stock {
+  final int id;
   final String title;
   final String asset;
   double price;
@@ -7,6 +8,7 @@ class Stock {
   final String negative;
 
   Stock({
+    required this.id,
     required this.title,
     required this.asset,
     required this.price,
@@ -18,6 +20,7 @@ class Stock {
 
 List<Stock> stocks = [
   Stock(
+    id: 1,
     title: 'Finance',
     asset: 'stock1',
     price: 180,
@@ -28,6 +31,7 @@ List<Stock> stocks = [
         'There was a market crash, many currencies failed to materialize and their existence ceased, investors are not happy about this, will have to limit their choice for investment',
   ),
   Stock(
+    id: 2,
     title: 'Technology',
     asset: 'stock2',
     price: 190,
@@ -38,6 +42,7 @@ List<Stock> stocks = [
         'The earth\'s atmosphere has changed, cell phones no longer work, scientists are looking for solutions, but it\'s not worth investing in just yet',
   ),
   Stock(
+    id: 3,
     title: 'Medicine',
     asset: 'stock3',
     price: 170,
@@ -48,6 +53,7 @@ List<Stock> stocks = [
         'A large number of legal medicines have been removed because of their harmfulness, now it has become even riskier to invest in medicine',
   ),
   Stock(
+    id: 4,
     title: 'Energy',
     asset: 'stock4',
     price: 185,
@@ -58,6 +64,7 @@ List<Stock> stocks = [
         'Invented a new energy source, but it\'s very costly, unlikely to be used, shares start to fall',
   ),
   Stock(
+    id: 5,
     title: 'Space',
     asset: 'stock5',
     price: 200,
