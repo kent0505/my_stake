@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -123,7 +124,89 @@ class _StockPageState extends State<StockPage> {
                       const Spacer(),
                       SellButton(
                         sell: widget.sell,
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                backgroundColor: const Color(0xff1C1027),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8),
+                                  ),
+                                ),
+                                child: Container(
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(height: 12),
+                                      const Text(
+                                        'Congratulations !',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        'You have purchased one share',
+                                        style: TextStyle(
+                                          color: const Color(0xffFFFFFF)
+                                              .withOpacity(0.6),
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Row(
+                                        children: [
+                                          const SizedBox(width: 36),
+                                          Image.asset(
+                                            'assets/${widget.stock.asset}.png',
+                                            height: 40,
+                                          ),
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      Container(
+                                        height: 35,
+                                        width: 235,
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 38,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xff7F04A8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: CupertinoButton(
+                                          onPressed: () {},
+                                          padding: EdgeInsets.zero,
+                                          child: const Center(
+                                            child: Text(
+                                              'Continue',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 9,
+                                                fontWeight: FontWeight.w600,
+                                                fontFamily: 'SF',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       const SizedBox(height: 41),
                     ],
