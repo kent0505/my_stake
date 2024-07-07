@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_stake/features/home/widgets/sell_dialog.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
@@ -137,7 +138,6 @@ class MyStockCard extends StatelessWidget {
                               ? 'assets/grow2.svg'
                               : 'assets/grow1.svg',
                         ),
-                        // const SizedBox(width: 4),
                         const Spacer(),
                         Text(
                           '${stock.grow}%',
@@ -164,7 +164,14 @@ class MyStockCard extends StatelessWidget {
                   const SizedBox(height: 10),
                   _Button(
                     sell: true,
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return SellDialog(stock: stock);
+                        },
+                      );
+                    },
                   ),
                   const SizedBox(height: 8),
                 ],
