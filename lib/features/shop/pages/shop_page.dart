@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/stock.dart';
-import '../widgets/current_coins_card.dart';
+import '../../../core/widgets/current_coins_card.dart';
 import '../widgets/buy_card.dart';
 import '../widgets/stock_card.dart';
 

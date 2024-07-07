@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils.dart';
-import '../../../core/widgets/money_icon.dart';
+import '../utils.dart';
+import 'money_icon.dart';
 
 class CurrentCoinsCard extends StatelessWidget {
   const CurrentCoinsCard({super.key});

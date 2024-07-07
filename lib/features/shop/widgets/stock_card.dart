@@ -11,9 +11,11 @@ class StockCard extends StatelessWidget {
   const StockCard({
     super.key,
     required this.stock,
+    this.active = true,
   });
 
   final Stock stock;
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,18 @@ class StockCard extends StatelessWidget {
       height: 67,
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: active ? Colors.black : Colors.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: CupertinoButton(
-        onPressed: () {
-          context.push('/stock', extra: stock);
-        },
+        onPressed: active
+            ? () {
+                context.push('/stock', extra: {
+                  "stock": stock,
+                  "sell": false,
+                });
+              }
+            : null,
         padding: EdgeInsets.zero,
         child: Row(
           children: [

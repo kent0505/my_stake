@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 
-import '../../features/shop/models/stock.dart';
 import '../../features/shop/pages/stock_page.dart';
 import '../../features/splash/splash_page.dart';
 import '../../features/splash/onboard_page.dart';
@@ -23,9 +22,13 @@ final routerConfig = GoRouter(
     ),
     GoRoute(
       path: '/stock',
-      builder: (context, state) => StockPage(
-        stock: state.extra as Stock,
-      ),
+      builder: (context, state) {
+        final data = state.extra as Map<String, dynamic>;
+        return StockPage(
+          stock: data["stock"],
+          sell: data["sell"],
+        );
+      },
     ),
   ],
 );
