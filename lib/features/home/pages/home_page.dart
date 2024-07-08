@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_stake/core/utils.dart';
-import 'package:my_stake/features/home/widgets/my_stock_card.dart';
 
+import '../../../core/utils.dart';
 import '../../../core/widgets/current_coins_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../shop/pages/shop_page.dart';
@@ -12,6 +12,7 @@ import '../../stock/bloc/stock_bloc.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/empty_data.dart';
 import '../widgets/generate_card.dart';
+import '../widgets/my_stock_card.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/your_stock_card.dart';
 import 'settings_page.dart';
@@ -109,7 +110,9 @@ class _Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 63),
+                SizedBox(
+                  height: 63 + MediaQuery.of(context).viewPadding.bottom,
+                ),
               ],
             ),
           ),

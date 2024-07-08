@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_stake/core/utils.dart';
 
+import '../../../core/utils.dart';
 import '../models/stock.dart';
 
 part 'shop_event.dart';
@@ -17,6 +17,12 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
         await saveMyCoins(event.stock.price * event.count);
         emit(ShopSuccessState());
       }
+    });
+
+    on<SellStockEvent>((event, emit) async {
+      await saveStock(event.stock.id, 0);
+      await addMyCoins(event.stock.price * event.count);
+      emit(ShopSuccessState());
     });
   }
 }

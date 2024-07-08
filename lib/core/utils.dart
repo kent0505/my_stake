@@ -52,7 +52,14 @@ Future<void> saveMyCoins(double coins) async {
   myCoins = prefs.getDouble('myCoins') ?? 10000;
 }
 
+Future<void> addMyCoins(double coins) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setDouble('myCoins', coins);
+  myCoins = prefs.getDouble('myCoins') ?? 10000;
+}
+
 void getMyStocks() {
+  myStocks = [];
   for (Stock stock in stocks) {
     if (stock1 != 0 && stock.id == 1) myStocks.add(stock);
     if (stock2 != 0 && stock.id == 2) myStocks.add(stock);

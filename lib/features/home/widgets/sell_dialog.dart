@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_stake/core/utils.dart';
 
 import '../../../core/config/app_colors.dart';
+import '../../../core/utils.dart';
 import '../../../core/widgets/money_icon.dart';
+import '../../shop/bloc/shop_bloc.dart';
 import '../../shop/models/stock.dart';
 import '../../stock/bloc/stock_bloc.dart';
 
@@ -73,7 +74,16 @@ class SellDialog extends StatelessWidget {
               const SizedBox(height: 13),
               _DataCard(stock: stock),
               const Spacer(),
-              const _Button(),
+              _Button(
+                onPressed: () {
+                  context.read<ShopBloc>().add(
+                        SellStockEvent(
+                          stock: stock,
+                          count: getMyStockCount(stock),
+                        ),
+                      );
+                },
+              ),
               const SizedBox(height: 17),
             ],
           ),
@@ -165,7 +175,9 @@ class _DataCard extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
-  const _Button();
+  const _Button({required this.onPressed});
+
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +191,7 @@ class _Button extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: CupertinoButton(
-        onPressed: () {},
+        onPressed: onPressed,
         padding: EdgeInsets.zero,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -10,3 +10,12 @@ class BuyStockEvent extends ShopEvent {
     required this.count,
   });
 }
+
+class SellStockEvent extends ShopEvent {
+  final Stock stock;
+  final int count;
+  SellStockEvent({
+    required this.stock,
+    required this.count,
+  });
+}

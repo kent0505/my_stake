@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:my_stake/features/home/widgets/sell_dialog.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/money_icon.dart';
 import '../../shop/models/stock.dart';
 import '../../stock/bloc/stock_bloc.dart';
+import 'sell_dialog.dart';
 
 class MyStockCard extends StatelessWidget {
   const MyStockCard({super.key, required this.stock});
