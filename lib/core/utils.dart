@@ -124,3 +124,8 @@ String getTotalStockPrice2(Stock stock, int count) {
   String formattedNumber = total.toStringAsFixed(1);
   return formattedNumber.replaceAll('.0', '');
 }
+
+String getTotalMoney() {
+  String formattedNumber = myCoins.toStringAsFixed(1);
+  return formattedNumber.replaceAll('.0', '');
+}

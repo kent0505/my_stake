@@ -24,13 +24,6 @@ class NavBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _NavBarButton(
-                  asset: 'shop',
-                  active: state is HomeShop,
-                  onPressed: () {
-                    context.read<HomeBloc>().add(ChangePageEvent(index: 1));
-                  },
-                ),
-                _NavBarButton(
                   asset: 'home',
                   active: state is HomeInitial,
                   onPressed: () {
@@ -38,10 +31,24 @@ class NavBar extends StatelessWidget {
                   },
                 ),
                 _NavBarButton(
+                  asset: 'shop',
+                  active: state is HomeShop,
+                  onPressed: () {
+                    context.read<HomeBloc>().add(ChangePageEvent(index: 1));
+                  },
+                ),
+                _NavBarButton(
+                  asset: 'news',
+                  active: state is HomeNews,
+                  onPressed: () {
+                    context.read<HomeBloc>().add(ChangePageEvent(index: 2));
+                  },
+                ),
+                _NavBarButton(
                   asset: 'settings',
                   active: state is HomeSettings,
                   onPressed: () {
-                    context.read<HomeBloc>().add(ChangePageEvent(index: 2));
+                    context.read<HomeBloc>().add(ChangePageEvent(index: 3));
                   },
                 ),
               ],
@@ -88,7 +95,15 @@ class _NavBarButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (asset == 'home')
+            if (asset == 'news')
+              Image.asset(
+                'assets/$asset.png',
+                height: 30,
+                color: active
+                    ? AppColors.pink
+                    : const Color(0xffffffff).withOpacity(0.7),
+              )
+            else if (asset == 'home')
               SvgPicture.asset(
                 'assets/$asset.svg',
                 color: active

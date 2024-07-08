@@ -6,4 +6,6 @@ class HomeInitial extends HomeState {}
 
 class HomeShop extends HomeState {}
 
+class HomeNews extends HomeState {}
+
 class HomeSettings extends HomeState {}

@@ -12,6 +12,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       } else if (event.index == 1) {
         if (state is HomeShop) return;
         emit(HomeShop());
+      } else if (event.index == 2) {
+        if (state is HomeNews) return;
+        emit(HomeNews());
       } else {
         if (state is HomeSettings) return;
         emit(HomeSettings());

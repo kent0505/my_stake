@@ -29,7 +29,7 @@ class CurrentCoinsCard extends StatelessWidget {
                   child: BlocBuilder<ShopBloc, ShopState>(
                     builder: (context, state) {
                       return Text(
-                        '$myCoins'.replaceAll('.0', ''),
+                        getTotalMoney(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,

@@ -23,7 +23,7 @@ class StockCard extends StatelessWidget {
       height: 67,
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
-        color: active ? Colors.black : Colors.black.withOpacity(0.5),
+        color: Colors.black.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: CupertinoButton(

@@ -14,6 +14,7 @@ import '../widgets/generate_card.dart';
 import '../widgets/my_stock_card.dart';
 import '../widgets/nav_bar.dart';
 import '../widgets/your_stock_card.dart';
+import 'news_page.dart';
 import 'settings_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,6 +46,8 @@ class _HomePageState extends State<HomePage> {
                     if (state is HomeShop) return const ShopPage();
 
                     if (state is HomeSettings) return const SettingsPage();
+
+                    if (state is HomeNews) return const NewsPage();
 
                     return const _Home();
                   },
