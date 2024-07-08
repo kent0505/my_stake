@@ -52,10 +52,16 @@ Future<void> saveMyCoins(double coins) async {
   myCoins = prefs.getDouble('myCoins') ?? 10000;
 }
 
-Future<void> addMyCoins(double coins) async {
+Future<void> sellStock(int id, double coins) async {
   final prefs = await SharedPreferences.getInstance();
-  prefs.setDouble('myCoins', coins);
-  myCoins = prefs.getDouble('myCoins') ?? 10000;
+  if (id == 1) prefs.setInt('stock1', 0);
+  if (id == 2) prefs.setInt('stock2', 0);
+  if (id == 3) prefs.setInt('stock3', 0);
+  if (id == 4) prefs.setInt('stock4', 0);
+  if (id == 5) prefs.setInt('stock5', 0);
+  prefs.setDouble('myCoins', myCoins + coins);
+  await getData();
+  getMyStocks();
 }
 
 void getMyStocks() {
@@ -85,4 +91,29 @@ double getRandomPercent() {
   double data = randomIndex2 + randomIndex;
   double formattedValue = double.parse(data.toStringAsFixed(1));
   return formattedValue;
+}
+
+Stock getRandomStock() {
+  Random random = Random();
+  int randomIndex = random.nextInt(stocks.length);
+  for (Stock stock in stocks) {
+    if (stock == stocks[randomIndex]) {
+      return Stock(
+        id: stock.id,
+        title: stock.title,
+        asset: stock.asset,
+        price: stock.price,
+        grow: getRandomPercent(),
+        positive: stock.positive,
+        negative: stock.negative,
+      );
+    }
+  }
+  return stocks[randomIndex];
+}
+
+String getTotalStockPrice(Stock stock) {
+  double total = (stock.price + stock.grow) * getMyStockCount(stock);
+  String formattedNumber = total.toStringAsFixed(1);
+  return formattedNumber.replaceAll('.0', '');
 }

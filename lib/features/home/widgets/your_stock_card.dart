@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_stake/core/utils.dart';
 
 class YourStockCard extends StatelessWidget {
-  const YourStockCard({super.key});
+  const YourStockCard({super.key, required this.active});
+
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class YourStockCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xff7F04A8).withOpacity(0.5),
             borderRadius: BorderRadius.circular(32),
-            border: myStocks.isNotEmpty
+            border: active
                 ? Border.all(
                     width: 2,
                     color: const Color(0xffD66B95),

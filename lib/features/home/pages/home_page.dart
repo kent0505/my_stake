@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/current_coins_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
+import '../../shop/bloc/shop_bloc.dart';
 import '../../shop/pages/shop_page.dart';
 import '../../stock/bloc/stock_bloc.dart';
 import '../bloc/home_bloc.dart';
@@ -25,21 +24,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Timer? _timer;
-
   @override
   void initState() {
     super.initState();
     getMyStocks();
-    Timer.periodic(const Duration(seconds: 2), (Timer t) {
-      context.read<StockBloc>().add(ChangePriceEvent());
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer!.cancel();
-    super.dispose();
+    context.read<StockBloc>().add(StartTimerEvent());
   }
 
   @override
@@ -75,48 +64,52 @@ class _Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            children: [
-              SizedBox(height: 20),
-              CurrentCoinsCard(),
-              SizedBox(height: 7),
-              GenerateCard(),
-              SizedBox(height: 27),
-              YourStockCard(),
-            ],
-          ),
-        ),
-        if (myStocks.isEmpty)
-          const EmptyData()
-        else
-          Expanded(
-            child: Column(
-              children: [
-                const SizedBox(height: 10),
-                Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    children: [
-                      ...List.generate(
-                        myStocks.length,
-                        (index) {
-                          return MyStockCard(stock: myStocks[index]);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 63 + MediaQuery.of(context).viewPadding.bottom,
-                ),
-              ],
+    return BlocBuilder<ShopBloc, ShopState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  const CurrentCoinsCard(),
+                  const SizedBox(height: 7),
+                  const GenerateCard(),
+                  const SizedBox(height: 27),
+                  YourStockCard(active: myStocks.isNotEmpty),
+                ],
+              ),
             ),
-          ),
-      ],
+            if (myStocks.isEmpty)
+              const EmptyData()
+            else
+              Expanded(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    Expanded(
+                      child: ListView(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        children: [
+                          ...List.generate(
+                            myStocks.length,
+                            (index) {
+                              return MyStockCard(stock: myStocks[index]);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 63 + MediaQuery.of(context).viewPadding.bottom,
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        );
+      },
     );
   }
 }

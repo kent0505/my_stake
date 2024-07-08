@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/config/app_colors.dart';
+import '../../shop/bloc/shop_bloc.dart';
+import 'generate_dialog.dart';
 
 class GenerateCard extends StatelessWidget {
   const GenerateCard({super.key});
@@ -71,17 +74,31 @@ class _Button extends StatelessWidget {
         color: AppColors.pink,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: CupertinoButton(
-        onPressed: () {},
-        padding: EdgeInsets.zero,
-        child: const Center(
-          child: Text(
-            'Generate',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'SF',
+      child: BlocListener<ShopBloc, ShopState>(
+        listener: (context, state) {
+          if (state is GeneratedEventState) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return GenerateDialog(stock: state.stock);
+              },
+            );
+          }
+        },
+        child: CupertinoButton(
+          onPressed: () {
+            context.read<ShopBloc>().add(GenerateEvent());
+          },
+          padding: EdgeInsets.zero,
+          child: const Center(
+            child: Text(
+              'Generate',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'SF',
+              ),
             ),
           ),
         ),

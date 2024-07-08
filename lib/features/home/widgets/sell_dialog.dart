@@ -82,6 +82,7 @@ class SellDialog extends StatelessWidget {
                           count: getMyStockCount(stock),
                         ),
                       );
+                  context.pop();
                 },
               ),
               const SizedBox(height: 17),
@@ -183,9 +184,7 @@ class _Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 30,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 55,
-      ),
+      width: 200,
       decoration: BoxDecoration(
         color: const Color(0xff7F04A8),
         borderRadius: BorderRadius.circular(8),

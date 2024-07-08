@@ -89,7 +89,7 @@ class MyStockCard extends StatelessWidget {
                     children: [
                       const SizedBox(width: (90 * 30) / 100),
                       Text(
-                        '${(stock.price + stock.grow) * getMyStockCount(stock)}',
+                        getTotalStockPrice(stock),
                         style: const TextStyle(
                           color: AppColors.pink,
                           fontSize: 9,

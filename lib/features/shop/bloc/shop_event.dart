@@ -19,3 +19,5 @@ class SellStockEvent extends ShopEvent {
     required this.count,
   });
 }
+
+class GenerateEvent extends ShopEvent {}

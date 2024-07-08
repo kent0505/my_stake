@@ -148,7 +148,7 @@ class _Button extends StatelessWidget {
       child: CupertinoButton(
         onPressed: () {
           context.pop();
-          context.pop();
+          // context.pop();
         },
         padding: EdgeInsets.zero,
         child: const Center(

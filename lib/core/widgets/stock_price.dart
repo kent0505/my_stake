@@ -53,7 +53,7 @@ class StockPrice extends StatelessWidget {
         Row(
           children: [
             Text(
-              '${(stock.price + stock.grow) * count}',
+              '${(stock.price + stock.grow) * count}'.replaceAll('.0', ''),
               style: const TextStyle(
                 color: AppColors.pink,
                 fontSize: 9,

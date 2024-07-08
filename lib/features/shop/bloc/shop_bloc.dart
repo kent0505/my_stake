@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils.dart';
@@ -9,6 +11,7 @@ part 'shop_state.dart';
 class ShopBloc extends Bloc<ShopEvent, ShopState> {
   ShopBloc() : super(ShopInitial()) {
     on<BuyStockEvent>((event, emit) async {
+      log('BUY STOCK EVENT');
       await getData();
       if (event.stock.price * event.count > myCoins) {
         emit(ShopErrorState());
@@ -20,9 +23,15 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
     });
 
     on<SellStockEvent>((event, emit) async {
-      await saveStock(event.stock.id, 0);
-      await addMyCoins(event.stock.price * event.count);
+      log('SELL STOCK EVENT');
+      await sellStock(event.stock.id, event.stock.price * event.count);
       emit(ShopSuccessState());
+    });
+
+    on<GenerateEvent>((event, emit) async {
+      log('GENERATE EVENT');
+
+      emit(GeneratedEventState(stock: getRandomStock()));
     });
   }
 }
