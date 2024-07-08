@@ -118,3 +118,9 @@ String getTotalStockPrice(Stock stock) {
   String formattedNumber = total.toStringAsFixed(1);
   return formattedNumber.replaceAll('.0', '');
 }
+
+String getTotalStockPrice2(Stock stock, int count) {
+  double total = (stock.price + stock.grow) * count;
+  String formattedNumber = total.toStringAsFixed(1);
+  return formattedNumber.replaceAll('.0', '');
+}

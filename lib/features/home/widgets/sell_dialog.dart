@@ -156,7 +156,7 @@ class _DataCard extends StatelessWidget {
               BlocBuilder<StockBloc, StockState>(
                 builder: (context, state) {
                   return Text(
-                    '${(stock.price + stock.grow) * count}',
+                    getTotalStockPrice2(stock, count),
                     style: const TextStyle(
                       color: AppColors.pink,
                       fontSize: 9,

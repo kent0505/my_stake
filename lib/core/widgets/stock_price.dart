@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_stake/core/utils.dart';
 
 import '../../features/shop/models/stock.dart';
 import '../config/app_colors.dart';
@@ -53,7 +54,7 @@ class StockPrice extends StatelessWidget {
         Row(
           children: [
             Text(
-              '${(stock.price + stock.grow) * count}'.replaceAll('.0', ''),
+              getTotalStockPrice2(stock, count),
               style: const TextStyle(
                 color: AppColors.pink,
                 fontSize: 9,

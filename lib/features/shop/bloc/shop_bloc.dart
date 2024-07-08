@@ -17,20 +17,22 @@ class ShopBloc extends Bloc<ShopEvent, ShopState> {
         emit(ShopErrorState());
       } else {
         await saveStock(event.stock.id, event.count);
-        await saveMyCoins((event.stock.price * event.stock.grow) * event.count);
+        await saveMyCoins((event.stock.price + event.stock.grow) * event.count);
         emit(ShopSuccessState());
       }
     });
 
     on<SellStockEvent>((event, emit) async {
       log('SELL STOCK EVENT');
-      await sellStock(event.stock.id, event.stock.price * event.count);
+      await sellStock(
+        event.stock.id,
+        (event.stock.price + event.stock.grow) * event.count,
+      );
       emit(ShopSuccessState());
     });
 
     on<GenerateEvent>((event, emit) async {
       log('GENERATE EVENT');
-
       emit(GeneratedEventState(stock: getRandomStock()));
     });
   }
