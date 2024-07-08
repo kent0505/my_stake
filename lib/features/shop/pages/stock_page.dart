@@ -40,7 +40,8 @@ class _StockPageState extends State<StockPage> {
     try {
       double price = widget.stock.price + widget.stock.grow;
       double total = int.parse(controller.text) * price;
-      return total.toString();
+      String formattedNumber = total.toStringAsFixed(1);
+      return formattedNumber.replaceAll('.0', '');
     } catch (e) {
       return widget.stock.price.toString();
     }

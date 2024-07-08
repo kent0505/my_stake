@@ -29,23 +29,25 @@ class MyStockCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const SizedBox(width: 8),
-          Column(
-            children: [
-              const SizedBox(height: 12),
-              Image.asset(
-                'assets/${stock.asset}.png',
-                height: 70,
-              ),
-              Text(
-                stock.title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+          SizedBox(
+            width: 92,
+            child: Column(
+              children: [
+                const SizedBox(height: 12),
+                Image.asset(
+                  'assets/${stock.asset}.png',
+                  height: 70,
                 ),
-              ),
-            ],
+                Text(
+                  stock.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
           const Spacer(),
           BlocBuilder<StockBloc, StockState>(
@@ -126,59 +128,61 @@ class MyStockCard extends StatelessWidget {
           const Spacer(),
           BlocBuilder<StockBloc, StockState>(
             builder: (context, state) {
-              return Column(
-                children: [
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: 45,
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          stock.grow < 0
-                              ? 'assets/grow2.svg'
-                              : 'assets/grow1.svg',
-                        ),
-                        const Spacer(),
-                        Text(
-                          '${stock.grow}%',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'SF',
+              return SizedBox(
+                width: 92,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: 45,
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            stock.grow < 0
+                                ? 'assets/grow2.svg'
+                                : 'assets/grow1.svg',
                           ),
-                        ),
-                      ],
+                          const Spacer(),
+                          Text(
+                            '${stock.grow}%',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'SF',
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  _Button(
-                    sell: false,
-                    onPressed: () {
-                      context.push('/stock', extra: {
-                        "stock": stock,
-                        "sell": false,
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  _Button(
-                    sell: true,
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return SellDialog(stock: stock);
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                ],
+                    const SizedBox(height: 10),
+                    _Button(
+                      sell: false,
+                      onPressed: () {
+                        context.push('/stock', extra: {
+                          "stock": stock,
+                          "sell": false,
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    _Button(
+                      sell: true,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return SellDialog(stock: stock);
+                          },
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
               );
             },
           ),
-          const SizedBox(width: 8),
         ],
       ),
     );

@@ -15,6 +15,7 @@ List<Stock> myStocks = [];
 
 Future<void> getData() async {
   final prefs = await SharedPreferences.getInstance();
+  // await prefs.remove('onboarding');
   // await prefs.remove('myCoins');
   // await prefs.remove('stock1');
   // await prefs.remove('stock2');
