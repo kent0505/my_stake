@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:my_stake/core/config/app_colors.dart';
 
 import '../models/news.dart';
@@ -39,7 +40,7 @@ class NewsPage extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 63),
+        SizedBox(height: 63 + MediaQuery.of(context).viewPadding.bottom),
       ],
     );
   }
